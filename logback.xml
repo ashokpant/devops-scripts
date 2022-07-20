@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd_HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n</pattern>
+        </encoder>
+        <!--<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="com.oyster.utils.MaskingPatternLayout">
+                <mask>#</mask>
+                <maskLength>11</maskLength>
+                <patternsProperty>532005[0-9]{10}</patternsProperty>
+                <pattern>%d{yyyy-MM-dd_HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n</pattern>
+            </layout>
+        </encoder>-->
+    </appender>
+    <appender name="ELASTIC" class="com.internetitem.logback.elasticsearch.ElasticsearchAppender">
+        <url>http://localhost:9200/_bulk</url>
+        <index>oys-pspdlocal-%date{yyyy-MM}</index>
+        <type>tester</type>
+        <mask>#</mask>
+        <maskLength>11</maskLength>
+        <patternsProperty></patternsProperty>
+        <loggerName>es-logger</loggerName> <!-- optional -->
+        <errorLoggerName>es-error-logger</errorLoggerName> <!-- optional -->
+        <connectTimeout>30000</connectTimeout> <!-- optional (in ms, default 30000) -->
+        <errorsToStderr>false</errorsToStderr> <!-- optional (default false) -->
+        <includeCallerData>false</includeCallerData> <!-- optional (default false) -->
+        <logsToStderr>false</logsToStderr> <!-- optional (default false) -->
+        <maxQueueSize>104857600</maxQueueSize> <!-- optional (default 104857600) -->
+        <maxRetries>3</maxRetries> <!-- optional (default 3) -->
+        <readTimeout>30000</readTimeout> <!-- optional (in ms, default 30000) -->
+        <sleepTime>250</sleepTime> <!-- optional (in ms, default 250) -->
+        <rawJsonMessage>false</rawJsonMessage> <!-- optional (default false) -->
+        <includeMdc>true</includeMdc> <!-- optional (default false) -->
+        <maxMessageSize>-1</maxMessageSize> <!-- optional (default -1 -->
+        <authentication class="com.internetitem.logback.elasticsearch.config.BasicAuthentication" /> <!-- optional -->
+        <properties>
+            <property>
+                <name>host</name>
+                <value>${HOSTNAME}</value>
+                <allowEmpty>false</allowEmpty>
+            </property>
+            <property>
+                <name>severity</name>
+                <value>%level</value>
+            </property>
+            <property>
+                <name>thread</name>
+                <value>%thread</value>
+            </property>
+            <property>
+                <name>stacktrace</name>
+                <value>%ex</value>
+            </property>
+            <property>
+                <name>logger</name>
+                <value>%logger</value>
+            </property>
+        </properties>
+        <headers>
+            <header>
+                <name>Content-Type</name>
+                <value>application/json</value>
+            </header>
+        </headers>
+    </appender>
+    <logger name="org.eclipse.jetty" level="ERROR" />
+    <logger name="org.apache.commons" level="ERROR" />
+    <logger name="org.apache.http" level="ERROR" />
+    <logger name="org.apache.zookeeper" level="ERROR" />
+    <logger name="org.springframework" additivity="false" level="WARN">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="ELASTIC"/>
+    </logger>
+    <logger name="com.amazonaws" level="ERROR">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="ELASTIC"/>
+    </logger>
+    <logger name="com.oyster" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="ELASTIC"/>
+    </logger>
+    <!--<logger name="com.zaxxer.hikari" additivity="false" level="DEBUG">
+       <appender-ref ref="STDOUT"/>
+      <appender-ref ref="ELASTIC"/>
+    </logger>-->
+    <logger name="es-error-logger" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="org.apache.http.wire" additivity="false" level="WARN">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="ELASTIC"/>
+    </logger>
+    <!--<logger name="org.springframework.web.client" additivity="false" level="DEBUG">
+       <appender-ref ref="STDOUT"/>
+      <appender-ref ref="ELASTIC"/>
+    </logger>-->
+    <root level="ERROR">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="ELASTIC"/>
+    </root>
+</configuration>
+
