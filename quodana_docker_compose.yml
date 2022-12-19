@@ -1,0 +1,13 @@
+version: "3"
+services:
+  sonarqube:
+    image: jetbrains/qodana
+    hostname: sonarqube
+    container_name: qodana
+    volumes:
+      - qodana_data:/data/
+    ports:
+      - "8080:8080"
+
+volumes:
+  qodana_data:
