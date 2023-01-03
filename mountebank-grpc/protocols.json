@@ -1,0 +1,5 @@
+{
+    "grpc": {
+        "createCommand": "mb-grpc"
+    }
+}
