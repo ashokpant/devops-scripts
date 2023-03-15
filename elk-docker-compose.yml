@@ -1,0 +1,18 @@
+elk:
+  image: sebp/elk
+  hostname: elk
+  container_name: elk
+  ports:
+    - "5601:5601"
+    - "9200:9200"
+    - "5044:5044"
+
+  ulimits:
+    nproc: 75540
+      #nofile:
+      # soft: 20000
+            # hard: 40000
+  environment:
+   - ES_CONNECT_RETRY=60
+     # - MAX_MAP_COUNT=262144
+#sudo sysctl -w vm.max_map_count=26214
