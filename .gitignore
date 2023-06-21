@@ -280,6 +280,8 @@ crf_py_utils.egg-info
 build
 venv
 volumes
+nohup.out
+elk/output
 dump.rdb
 nohup.out
 offsetexplorer.sh

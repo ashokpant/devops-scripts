@@ -1,0 +1,34 @@
+version: "3.6"
+services:
+    php:
+        build: .
+        restart: always
+        ports:
+            - "8181:80"
+        volumes:
+            - php_data:/var/www/html
+    mysql:
+        image: mysql:8.0
+        restart: always
+        ports:
+            - "3307:3306"
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+            - MYSQL_USER=ashok
+            - MYSQL_PASSWORD=ashok
+            - MYSQL_ROOT_PASSWORD=root
+        volumes:
+            - mysql_data:/var/lib/mysql
+    phpmyadmin:
+        image: phpmyadmin
+        restart: always
+        ports:
+            - 8282:80
+        environment:
+            - PMA_HOST=mysql
+volumes:
+    php_data:
+        driver: local
+    mysql_data:
+        driver: local
+

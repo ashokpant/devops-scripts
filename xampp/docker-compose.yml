@@ -1,0 +1,11 @@
+version: '3.6'
+services:
+  xampp:
+    image: tomsik68/xampp:latest
+    container_name: xampp
+    ports:
+      - "41061:22"
+      - "41062:80"
+    volumes:
+      - ~/xampp:/www
+    restart: always
