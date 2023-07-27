@@ -2,7 +2,8 @@ version: '3'
 
 services:
   grafana:
-    image: grafana/grafana:latest
+    #image: grafana/grafana:latest
+    image: grafana/grafana-enterprise
     container_name: grafana
     restart: always
     ports:

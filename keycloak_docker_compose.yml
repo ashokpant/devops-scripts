@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+    keycloak:
+      image: jboss/keycloak
+      environment:
+        - KEYCLOAK_LOGLEVEL=DEBUG
+        - DB_VENDOR=mysql
+        - DB_USER=root
+        - DB_DATABASE=keycloak
+        - DB_PASSWORD=root
+        - DB_PORT=3306
+        - DB_ADDR=172.17.0.1
+        - KEYCLOAK_USER=admin
+        - KEYCLOAK_PASSWORD=pikathnoOoEezsSc0l8ZCfZs
+        - KEYCLOAK_STATISTICS=all
+      ports:
+        - "18443:8443"
+        - "18080:8080"
+        - "19990:9990"
+      volumes:
+        - keycloak_data:/data
+        - ./keycloak/providers:/opt/jboss/keycloak/providers
+        - ./keycloak/standalone/configuration:/opt/jboss/keycloak/standalone/configuration
+volumes: 
+  keycloak_data:
