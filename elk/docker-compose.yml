@@ -23,7 +23,7 @@ services:
   kibana:
     depends_on:
       - elasticsearch
-    image: docker.elastic.co/kibana/kibana:latest
+    image: docker.elastic.co/kibana/kibana:${STACK_VERSION}
     container_name: kibana
     volumes:
       - kibana_data:/usr/share/kibana/data

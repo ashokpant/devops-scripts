@@ -1,1 +1,1 @@
-cd elk && docker-compose -f docker-compose.yml down && cd ..
+cd docker-elk && docker compose -f docker-compose.yml down && cd ..
