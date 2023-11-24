@@ -1,1 +1,1 @@
-docker-compose -f mssql-docker-compose.yml up -d
+docker compose -f mssql-docker-compose.yml up -d

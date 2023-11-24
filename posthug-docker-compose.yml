@@ -1,0 +1,7 @@
+version: '3.8'
+
+services:
+  posthug:
+    image: posthog/posthog
+    ports:
+      - "8082:80"

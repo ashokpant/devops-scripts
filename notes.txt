@@ -1,0 +1,4 @@
+View port details
+
+sudo netstat -pna | grep 9200
+sudo killall -9 docker-proxy
