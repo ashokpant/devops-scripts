@@ -285,3 +285,4 @@ elk/output
 dump.rdb
 nohup.out
 offsetexplorer.sh
+.DS_Store
