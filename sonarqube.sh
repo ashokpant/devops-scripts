@@ -1,6 +1,6 @@
 #!/bin/bash
-SERVICE_NAME=metasploit
-DOCKER_COMPOSE_FILE=./matasploit-docker-compose.yml
+SERVICE_NAME=sonarqube
+DOCKER_COMPOSE_FILE=./sonarqube-docker-compose.yml
 
 start() {
     echo "Starting $SERVICE_NAME service ..."
@@ -9,7 +9,7 @@ start() {
 
 stop() {
     echo "Stopping $SERVICE_NAME service ..."
-    docker compose -f $DOCKER_COMPOSE_FILE down --remove-orphans
+    docker compose -f $DOCKER_COMPOSE_FILE down  --remove-orphans
 }
 
 # Check the command-line argument to determine action
@@ -31,3 +31,4 @@ case "$1" in
 esac
 
 exit 0
+
