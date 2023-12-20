@@ -32,12 +32,18 @@ services:
     image: provectuslabs/kafka-ui:latest
     ports:
       - 8181:8080
+    networks:
+      - kafka-net
     environment:
       DYNAMIC_CONFIG_ENABLED: 'true'
       KAFKA_CLUSTERS_0_NAME: local
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-server:9092
-    # volumes:
-      # - ~/kui/config.yml:/etc/kafkaui/dynamic_config.yaml
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+    volumes:
+      - ~/kui/:/etc/kafkaui/
+    depends_on:
+      - kafka-server
+
+
 
 # version: "2"
 # services:
