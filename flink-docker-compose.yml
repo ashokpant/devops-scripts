@@ -1,33 +1,39 @@
-version: "2.2"
+version: '3'
+
 services:
   jobmanager:
     image: flink:latest
+    container_name: flink-jobmanager
+    expose:
+      - "6123"
     ports:
       - "8081:8081"
     command: jobmanager
     environment:
-      - |
-        FLINK_PROPERTIES=
-        jobmanager.rpc.address: jobmanager        
-
+      JOB_MANAGER_RPC_ADDRESS: jobmanager
+      FLINK_PROPERTIES: "jobmanager.rpc.address: jobmanager"
   taskmanager:
     image: flink:latest
+    container_name: flink-taskmanager
+    expose:
+      - "6121"
     depends_on:
       - jobmanager
     command: taskmanager
-    scale: 1
+    links:
+      - jobmanager:jobmanager
     environment:
-      - |
-        FLINK_PROPERTIES=
-        jobmanager.rpc.address: jobmanager
-        taskmanager.numberOfTaskSlots: 2        
-  sql-client:
+      JOB_MANAGER_RPC_ADDRESS: jobmanager
+      FLINK_PROPERTIES: "jobmanager.rpc.address: jobmanager"
+  web:
     image: flink:latest
-    command: bin/sql-client.sh
+    container_name: flink-web
+    expose:
+      - "8081"
+    ports:
+      - "8082:8081"
     depends_on:
       - jobmanager
+    command: "webclient"
     environment:
-      - |
-        FLINK_PROPERTIES=
-        jobmanager.rpc.address: jobmanager
-        rest.address: jobmanager     
+      JOB_MANAGER_RPC_ADDRESS: jobmanager
