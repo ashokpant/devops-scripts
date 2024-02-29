@@ -1,6 +1,6 @@
 #!/bin/bash
-SERVICE_NAME=kafka
-DOCKER_COMPOSE_FILE=./kafka-docker-compose.yml
+SERVICE_NAME=jenkins
+DOCKER_COMPOSE_FILE=./jenkins-docker-compose.yml
 
 start() {
     echo "Starting $SERVICE_NAME service ..."
