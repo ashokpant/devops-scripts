@@ -1,0 +1,8 @@
+version: '3'
+services:
+  elastichq:
+    image: elastichq/elasticsearch-hq
+    container_name: elastichq
+    ports:
+      - "5005:5000"
+    restart: always

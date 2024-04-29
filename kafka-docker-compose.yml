@@ -35,14 +35,14 @@ services:
       - KAFKA_CLUSTERS_0_BOOTSTRAP_SERVERS=kafka:29092
       - KAFKA_CLUSTERS_0_ZOOKEEPER_CONNECT=zookeeper:2181
       - KAFKA_CLUSTERS_1_NAME=treeelaf
-      - KAFKA_CLUSTERS_1_BOOTSTRAP_SERVERS=10.0.200.17:9092
-      - KAFKA_CLUSTERS_1_ZOOKEEPER_CONNECT=10.0.200.16:2181
+      - KAFKA_CLUSTERS_1_BOOTSTRAP_SERVERS=10.0.100.123:9092
+      - KAFKA_CLUSTERS_1_ZOOKEEPER_CONNECT=10.0.100.130:2181
 
   zoonavigator:
     image: elkozmon/zoonavigator
     container_name: zoonavigator
     ports:
-      - 9000:9000
+      - 9009:9000
     environment:
       - ZOOKEEPER_SERVERS=zookeeper:2181
       - ZK_HOSTS=zookeeper:2181
