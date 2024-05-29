@@ -9,6 +9,13 @@ start() {
     cd ..
 }
 
+build() {
+    cd docker-elk
+    echo "Building $SERVICE_NAME service ..."
+    docker compose -f $DOCKER_COMPOSE_FILE  up setup
+    cd ..
+}
+
 stop() {
      cd docker-elk
     echo "Stopping $SERVICE_NAME service ..."
@@ -23,6 +30,9 @@ case "$1" in
         ;;
     stop)
         stop
+        ;;
+    build)
+        build
         ;;
     restart)
         stop

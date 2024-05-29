@@ -6,3 +6,6 @@ services:
     ports:
       - "5005:5000"
     restart: always
+    environment:
+      - HQ_DEFAULT_URL=http://elastic:changeme@localhost:9200
+      - HQ_ENABLE_SSL=False
