@@ -1,6 +1,6 @@
 #!/bin/bash
-SERVICE_NAME=milvus
-DOCKER_COMPOSE_FILE=./milvus-docker-compose.yml
+SERVICE_NAME=minio
+DOCKER_COMPOSE_FILE=./minio-docker-compose.yml
 
 start() {
     echo "Starting $SERVICE_NAME service ..."
