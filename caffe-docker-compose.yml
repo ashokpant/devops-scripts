@@ -1,0 +1,7 @@
+services:
+  caffe:
+    image: caffe2ai/caffe2:latest
+    container_name: caffe
+    command: ["/bin/bash"]
+    stdin_open: true
+    tty: true
