@@ -1,0 +1,125 @@
+[
+  {
+    "port": 9999,
+    "addDefault": true,
+    "defaultBody": "{\"statusCode\":200,\"headers\":{\"connection\":\"close\"},\"body\":\"stuff\"}",
+    "CORsOrigin": "http://localhost:8383",
+    "allowedCORsHeaders": "application/json,Content-Type",
+    "allowedCORsMethods": "GET,POST,PUT,PATCH,DELETE",
+    "id": 0,
+    "description": "Bank Services",
+    "imposters": [
+      {
+        "responses": [
+          {
+            "status": 200,
+            "headers": [],
+            "body": "{\"balance\": 1500.50}",
+            "injection": {
+              "use": false,
+              "body": ""
+            },
+            "decorate": "",
+            "wait": ""
+          }
+        ],
+        "match": {
+          "path_match": {
+            "type": "equals",
+            "value": "/bank/balance"
+          },
+          "verb": "GET",
+          "query_params": [
+            {
+              "key": "accountNumber",
+              "value": "12345"
+            }
+          ],
+          "headers": [],
+          "body_match": {
+            "type": "equals",
+            "body": ""
+          },
+          "injection": {
+            "use": false,
+            "body": ""
+          }
+        }
+      },
+      {
+        "responses": [
+          {
+            "status": 200,
+            "headers": [],
+            "body": "{\"status\": \"Card Enabled Successfully\"}",
+            "injection": {
+              "use": false,
+              "body": ""
+            },
+            "decorate": "",
+            "wait": ""
+          }
+        ],
+        "match": {
+          "path_match": {
+            "type": "equals",
+            "value": "/card/enable"
+          },
+          "verb": "POST",
+          "query_params": [
+            {
+              "key": "cardNumber",
+              "value": "98765"
+            }
+          ],
+          "headers": [],
+          "body_match": {
+            "type": "equals",
+            "body": ""
+          },
+          "injection": {
+            "use": false,
+            "body": ""
+          }
+        }
+      },
+      {
+        "responses": [
+          {
+            "status": 200,
+            "headers": [],
+            "body": "{\"status\": \"Card Disabled Successfully\"}",
+            "injection": {
+              "use": false,
+              "body": ""
+            },
+            "decorate": "",
+            "wait": ""
+          }
+        ],
+        "match": {
+          "path_match": {
+            "type": "equals",
+            "value": "/card/disable"
+          },
+          "verb": "POST",
+          "query_params": [
+            {
+              "key": "cardNumber",
+              "value": "98765"
+            }
+          ],
+          "headers": [],
+          "body_match": {
+            "type": "equals",
+            "body": ""
+          },
+          "injection": {
+            "use": false,
+            "body": ""
+          }
+        }
+      }
+    ]
+  }
+]

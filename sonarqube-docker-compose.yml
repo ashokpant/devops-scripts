@@ -1,7 +1,7 @@
 version: "3"
 services:
   sonarqube:
-    image: sonarqube:community
+    image: sonarqube:latest
     hostname: sonarqube
     container_name: sonarqube
     depends_on:
@@ -17,7 +17,7 @@ services:
     ports:
       - "9000:9000"
   db:
-    image: postgres:12
+    image: postgres:16
     hostname: postgresql
     container_name: postgresql
     environment:
@@ -29,4 +29,4 @@ services:
       - $HOME/sonarqube_data/postgres/data:/var/lib/postgresql/data
 
 
-# admin/admin-> admin/s0narcube
+# admin/admin-> admin/pass

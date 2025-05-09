@@ -1,0 +1,13 @@
+
+services:
+  mountebank:
+    container_name: mountebank
+    image: djangofan/mountebank-with-ui-node
+    volumes:
+    - ./imposters:/imposters
+    ports:
+    - 2525:2525
+    - 2424:2424
+    - 9000:9000
+    # command: --configfile /imposters/imposters.ejs --allowInjection
+    

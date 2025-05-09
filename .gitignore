@@ -287,3 +287,6 @@ nohup.out
 offsetexplorer.sh
 .DS_Store
 data
+wiremock*
+duckling
+*.DS_Store*

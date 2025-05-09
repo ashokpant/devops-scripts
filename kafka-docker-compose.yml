@@ -37,6 +37,9 @@ services:
       - KAFKA_CLUSTERS_1_NAME=treeelaf
       - KAFKA_CLUSTERS_1_BOOTSTRAP_SERVERS=10.0.100.123:9092
       - KAFKA_CLUSTERS_1_ZOOKEEPER_CONNECT=10.0.100.130:2181
+      - KAFKA_CLUSTERS_2_BOOTSTRAP_SERVERS=kafka.services.svc.cluster.local:9092
+      - KAFKA_CLUSTERS_2_ZOOKEEPER_CONNECT=zookeeper.services.svc.cluster.local:2181
+      - KAFKA_CLUSTERS_2_NAME=anydone-dev
 
   zoonavigator:
     image: elkozmon/zoonavigator

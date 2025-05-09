@@ -1,0 +1,6 @@
+services:
+  swagger-editor:
+    image: swaggerapi/swagger-editor:next-v5-unprivileged
+    container_name: swagger-editor
+    ports:
+      - "8383:8080"
