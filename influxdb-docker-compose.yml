@@ -1,26 +1,81 @@
 services:
+  # influxdb:
+  #   image: influxdb:3-enterprise
+  #   container_name: influxdb
+  #   ports:
+  #     - "8086:8086"
+  #   volumes:
+  #     - ~/influxdb_data:/var/lib/influxdb3
+  #   environment:
+  #     - DOCKER_INFLUXDB_INIT_MODE=setup
+  #     - DOCKER_INFLUXDB_INIT_USERNAME=admin
+  #     - DOCKER_INFLUXDB_INIT_PASSWORD=Passw0rd
+  #     - DOCKER_INFLUXDB_INIT_ORG=treeleaf
+  #     - DOCKER_INFLUXDB_INIT_BUCKET=ibtrading
+  #     - INFLUXDB3_ENTERPRISE_LICENSE_EMAIL=asokpant@gmail.com
+  #   command: >
+  #     influxdb3 serve
+  #     --object-store file
+  #     --data-dir /var/lib/influxdb3
+  #     --cluster-id cluster
+  #     --node-id  node1
   influxdb:
-    image: influxdb:latest
+    image: influxdb:3-core
     container_name: influxdb
     ports:
-      - "8086:8086"
+      - "8181:8181"
     volumes:
-      - influxdb_data:/var/lib/influxdb
+      - ~/influxdb_data:/var/lib/influxdb3
     environment:
-      - INFLUXDB_DB=mydb
-      - INFLUXDB_HTTP_AUTH_ENABLED=true
-      - INFLUXDB_ADMIN_USER=admin
-      - INFLUXDB_ADMIN_PASSWORD=password
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=Passw0rd
+      - DOCKER_INFLUXDB_INIT_ORG=treeleaf
+      - DOCKER_INFLUXDB_INIT_BUCKET=ibtrading
+      - INFLUXDB3_ENTERPRISE_LICENSE_EMAIL=asokpant@gmail.com
+    command: >
+      influxdb3 serve
+      --object-store file
+      --data-dir /var/lib/influxdb3
+      --node-id node1
 
-  chronograf:
-    image: chronograf:latest
-    container_name: chronograf
+  influxui:
+    image: influxdata/influxdb3-ui:1.0.0
+    container_name: influxui
     ports:
-      - "8888:8888"
-    links:
-      - influxdb
+      - "8787:80"
+    command: --mode=admin # --mode=admin for admin UI, --mode=query for query UI 
     environment:
-      - INFLUXDB_URL=http://influxdb:8086
+      - DEFAULT_INFLUX_SERVER=http://host.docker.internal:8181
+      - DEFAULT_API_TOKEN=apiv3_NrpFQWiy9rufU9PnDrZiDxIEe1XtAN1q-zXWtT9vawRrthSGfgXWmbvJCes1POWgitHTEU2kGineZL1u81F9gA
+      - DEFAULT_SERVER_NAME=local
+    volumes:
+      - ~/influxdb_data/uidata/db/:/db
+      - ~/influxdb_data/uidata/config/:/app-root/config
+      - ~/influxdb_data/uidata/ssl/:/etc/nginx/ssl
+    depends_on:
+      - influxdb
+  # chronograf:
+  #   image: chronograf:latest
+  #   container_name: chronograf
+  #   ports:
+  #     - "8888:8888"
+  #   links:
+  #     - influxdb
+  #   environment:
+  #     - INFLUXDB_URL=http://influxdb:8086
+  
+  # grafana:
+  #   #image: grafana/grafana:latest
+  #   image: grafana/grafana-enterprise
+  #   container_name: grafana
+  #   restart: always
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - ~grafana_data:/var/lib/grafana
+  #   environment:
+  #     - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
 
   # telegraf:
   #   image: telegraf:latest
@@ -30,5 +85,4 @@ services:
   #   volumes:
   #     - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
 
-volumes:
-  influxdb_data:
+  
