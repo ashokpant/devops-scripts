@@ -1,6 +1,6 @@
 #!/bin/bash
-SERVICE_NAME=kafka
-DOCKER_COMPOSE_FILE=./kafka-docker-compose.yml
+SERVICE_NAME=n8n
+DOCKER_COMPOSE_FILE=./n8n-docker-compose.yml
 
 start() {
     echo "Starting $SERVICE_NAME service ..."
@@ -9,7 +9,7 @@ start() {
 
 stop() {
     echo "Stopping $SERVICE_NAME service ..."
-    docker compose -f $DOCKER_COMPOSE_FILE down  --remove-orphans
+    docker compose -f $DOCKER_COMPOSE_FILE down 
 }
 
 # Check the command-line argument to determine action
@@ -24,12 +24,8 @@ case "$1" in
         stop
         start
         ;;
-    pull)
-        echo "Pulling latest images for $SERVICE_NAME service ..."
-        docker compose -f $DOCKER_COMPOSE_FILE pull
-        ;;
     *)
-        echo "Usage: $0 {start|stop|restart|pull}"
+        echo "Usage: $0 {start|stop|restart}"
         exit 1
         ;;
 esac

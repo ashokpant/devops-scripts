@@ -290,3 +290,5 @@ data
 wiremock*
 duckling
 *.DS_Store*
+*-data
+*_data

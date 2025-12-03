@@ -1,0 +1,45 @@
+# services:
+#   openvpn-as:
+#     image: openvpn/openvpn-as
+#     container_name: openvpn-as
+#     cap_add:
+#       - NET_ADMIN
+#       - MKNOD
+#     devices:
+#       - /dev/net/tun
+#     ports:
+#       - "943:943"   # Admin Web UI
+#       - "443:443"   # OpenVPN TCP
+#       - "1194:1194/udp"  # OpenVPN UDP
+#     volumes:
+#       - ~/vpn_data:/openvpn
+#     restart: unless-stopped
+
+
+# # https://localhost:943/admin/
+
+
+
+services:
+  wg-easy:
+    image: ghcr.io/wg-easy/wg-easy:15.1.0
+    container_name: wg-easy
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    restart: unless-stopped
+    volumes:
+      - ~/vpn_data/etc_wireguard:/etc/wireguard
+      - ~/vpn_data/lib/modules:/lib/modules:ro
+    ports:
+      - "51820:51820/udp"
+      - "51821:51821/tcp"
+    environment:
+      - WG_HOST=192.168.1.184
+      - INSECURE=false
+      - PASSWORD_HASH='$2a$12$7UtpnQ9amzLgv9VaFFsi5uevkTEf6E9syABcwDvmwc2BqI752mXja' # Passw0rd
+
+
+
+
+ #docker run ghcr.io/wg-easy/wg-easy:latest wgpw Passw0rd

@@ -1,0 +1,16 @@
+services:
+    questdb:
+      container_name: questdb
+      image: questdb/questdb:latest
+      ports:
+        - "9000:9000" 
+        - "8812:8812" 
+        - "9009:9009"
+      volumes:
+        - ~/questdb_data:/var/lib/questdb
+        
+      environment:
+        # Optional: Set the Java memory limits (adjust based on your machine's resources)
+        QDB_JAVA_OPTS: -Xmx4G -Xms4G
+        
+      restart: always

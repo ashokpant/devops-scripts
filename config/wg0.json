@@ -1,0 +1,19 @@
+{
+  "server": {
+    "privateKey": "wOcJoRdNYP+JK+vUr1vQB8RADhhUTxtbVZNdVdIpFXg=",
+    "publicKey": "/HLeyakukaCAa2g8pyPOLzooH2eiyP6oIYkdzKbm3mc=",
+    "address": "10.8.0.1"
+  },
+  "clients": {
+    "ca01353c-09a9-4df3-8a32-af5041a55441": {
+      "name": "ashok",
+      "address": "10.8.0.2",
+      "privateKey": "ENHhQfypaQyZ9O+47BXDo5OQpwbg44jsOvkCrlrO3UE=",
+      "publicKey": "LpAj+v8ewYiIsXXQKlAwdV3+dxSYyY8EJBu0ITay1X0=",
+      "preSharedKey": "bYPGN0qujvNKIrHk+4mB3J3afhipWEroZDVDOXcpPpM=",
+      "createdAt": "2025-09-07T03:16:09.569Z",
+      "updatedAt": "2025-09-07T03:16:09.569Z",
+      "enabled": true
+    }
+  }
+}

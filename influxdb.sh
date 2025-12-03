@@ -20,12 +20,16 @@ case "$1" in
     stop)
         stop
         ;;
+    pull)
+        echo "Pulling latest images for $SERVICE_NAME service ..."
+        docker compose -f $DOCKER_COMPOSE_FILE pull
+        ;;
     restart)
         stop
         start
         ;;
     *)
-        echo "Usage: $0 {start|stop|restart}"
+        echo "Usage: $0 {start|stop|pull|restart}"
         exit 1
         ;;
 esac

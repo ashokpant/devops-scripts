@@ -22,6 +22,11 @@ services:
   influxdb:
     image: influxdb:3-core
     container_name: influxdb
+    restart: always
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
     ports:
       - "8181:8181"
     volumes:
@@ -33,14 +38,21 @@ services:
       - DOCKER_INFLUXDB_INIT_ORG=treeleaf
       - DOCKER_INFLUXDB_INIT_BUCKET=ibtrading
       - INFLUXDB3_ENTERPRISE_LICENSE_EMAIL=asokpant@gmail.com
+      - INFLUXDB3_QUERY_FILE_LIMIT=100000
     command: >
-      influxdb3 serve
-      --object-store file
-      --data-dir /var/lib/influxdb3
+      influxdb3 
+      --num-io-threads=12 
+      serve 
+      --exec-mem-pool-bytes=70% 
+      --gen1-duration 10m
+      --wal-flush-interval=200ms
+      --parquet-mem-cache-size=30%
+      --object-store file 
+      --data-dir /var/lib/influxdb3   
       --node-id node1
 
   influxui:
-    image: influxdata/influxdb3-ui:1.0.0
+    image: influxdata/influxdb3-ui
     container_name: influxui
     ports:
       - "8787:80"
@@ -71,7 +83,7 @@ services:
   #   container_name: grafana
   #   restart: always
   #   ports:
-  #     - "3000:3000"
+  #     - "3003:3000"
   #   volumes:
   #     - ~grafana_data:/var/lib/grafana
   #   environment:
@@ -84,5 +96,3 @@ services:
   #     - influxdb
   #   volumes:
   #     - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
-
-  
